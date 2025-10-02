@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Green Leaf - Tu plantera de confianza</title>
+  <link rel="icon" type="image/png" href="assets/images/hoja.jpg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="assets/images/hoja.jpg" class="rounded" style="width: 50px; height: 40px; margin-right: 10px;"
+          alt="Logo Green Leaf">
+        Green Leaf
+      </a>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="pages/plantas/catalogo.html">Catalogo</a></li>
+        <li class="nav-item"><a class="nav-link" href="pages/faq/faq.html">Preguntas frecuentes</a></li>
+        <li class="nav-item"><a class="nav-link" href="pages/contacto/contacto.html">Contacto</a></li>
+        <li class="nav-item">
+          <button class="btn btn-outline-light position-relative" id="cart-icon-btn" style="display:none;">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              id="wishlist-count">
+              0 <span class="visually-hidden">elementos en la lista de deseos</span>
+            </span>
+          </button>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="admin-link" href="pages/estadisticas/estadisticas.html"
+            style="display:none;">Estadisticas</a>
+        </li>
+      </ul>
+      <span id="user-role" class="navbar-text text-light me-3"></span>
+      <a class="btn btn-light" href="pages/login/login.html" id="acceso-clientes-link">Acceso
+        Clientes</a>
+      <a class="btn btn-light d-none" href="pages/login/login.html" id="login-btn">Login</a>
+      <button class="btn btn-outline-light d-none" id="logout-btn" onclick="cerrarSesion()">Cerrar sesion</button>
+    </div>
+    </div>
+  </nav>
+  <div id="carouselGreenLeaf" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/images-slider/foto5-carrusel.jpg" alt="carrusel 5">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images-slider/fotoCarrusel3.jpg" alt="carrusel 8">
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images-slider/fotoCarrusel4.jpg" alt="carrusel 9">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselGreenLeaf" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselGreenLeaf" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+  <section class="container my-5">
+    <div class="row align-items-center">
+      <div class="col-md-4">
+        <img src="assets/images/empresa.jpg" class="img-fluid rounded" alt="Sobre nosotros">
+      </div>
+      <div class="col-md-8">
+        <h2>¿Quienes somos?</h2>
+        <p>
+          Green Leaf es una planteria de confianza dedicada a ofrecer una gran variedad de plantas de
+          interior,
+          exterior, aromaticas y decorativas. Nos especializamos en brindar asesoramiento personalizado y
+          productos de
+          calidad. Ya seas un jardinero aficionado o un experto en botanica, tenemos algo para vos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="wishlist-sidebar" id="wishlist-sidebar">
+    <div class="sidebar-header">
+      <h5>Tu Lista de Deseos</h5>
+      <button type="button" class="btn-close text-reset" id="close-wishlist-btn" aria-label="Close"></button>
+    </div>
+    <div class="sidebar-body" id="sidebar-wishlist-items">
+      <p class="text-muted text-center mt-3" id="empty-wishlist-msg">Tu lista de deseos esta vacia</p>
+    </div>
+    <div class="sidebar-footer">
+      <p>Total: $<span id="sidebar-wishlist-total">0</span></p>
+      <a href="pages/wishlist/wishlist.html" class="btn btn-success w-100">Ver lista completa</a>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="main.js"></script>
+  <script src="pages/wishlist/wishlist.js"></script>
+
+</body>
+<footer class="bg-success text-white py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <h5>Green Leaf - Tu plantera de confianza</h5>
+        <ul class="list-unstyled">
+          <li><a href="index.html" class="text-white text-decoration-none">Inicio</a></li>
+          <li><a href="pages/plantas/catalogo.html" class="text-white text-decoration-none">Plantas</a></li>
+          <li><a href="pages/faq/faq.html" class="text-white text-decoration-none">Preguntas frecuentes</a>
+          </li>
+          <li><a href="pages/contacto/contacto.html" class="text-white text-decoration-none">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-3">
+        <p><strong>Email:</strong> green-leaf@gmail.com</p>
+        <p><strong>Tel:</strong> +54 341 0000000</p>
+        <p><strong>Instagram:</strong> @greenLeaf</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogo de Plantas - Green Leaf</title>
+  <link rel="icon" type="image/png" href="../../assets/images/hoja.jpg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="catalogo.css">
+</head>
+
+<body style="background-color: #f5f5f5;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-success">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">
+        <img src="../../assets/images/hoja.jpg" class="rounded" style="width: 50px; height: 40px; margin-right: 10px;"
+          alt="Logo Green Leaf">
+        Green Leaf
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link active" href="catalogo.html">Catalogo</a></li>
+          <li class="nav-item"><a class="nav-link " href="../faq/faq.html">Preguntas frecuentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="../contacto/contacto.html">Contacto</a></li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light position-relative" id="cart-icon-btn" style="display:none;"> <i
+                class="fas fa-shopping-cart"></i> <span
+                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                id="wishlist-count">
+                0 <span class="visually-hidden">elementos en la lista de deseos</span>
+              </span>
+            </button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="admin-link" href="../estadisticas/estadisticas.html"
+              style="display:none;">Estadisticas</a>
+          </li>
+        </ul>
+        <span id="user-role" class="navbar-text text-light me-3"></span>
+        <a class="btn btn-light" href="../login/login.html" id="acceso-clientes-link">Acceso
+          Clientes</a>
+        <a class="btn btn-light" href="../login/login.html" id="login-btn">Login</a>
+        <button class="btn btn-outline-light d-none" id="logout-btn" onclick="cerrarSesion()">Cerrar sesion</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid my-3">
+    <div class="row">
+      <div class="col-md-2">
+        <h5 class="mb-3">Filtrar</h5>
+
+        <div class="mb-3">
+          <label for="filtro-categoria" class="form-label">Categoria</label>
+          <select class="form-select" id="filtro-categoria">
+            <option value="todos">Todas</option>
+            <option value="aromatica">Aromatica</option>
+            <option value="interior">Interior</option>
+            <option value="exterior">Exterior</option>
+            <option value="frutal">Frutal</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="filtro-dificultad" class="form-label">Dificultad</label>
+          <select class="form-select" id="filtro-dificultad">
+            <option value="todas">Todas</option>
+            <option value="facil">Facil</option>
+            <option value="media">Media</option>
+            <option value="dificil">Dificil</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="filtro-precio-min" class="form-label">Precio Minimo ($)</label>
+          <input type="number" class="form-control" id="filtro-precio-min" value="0" min="0" step="1" />
+        </div>
+        <div class="mb-3">
+          <label for="filtro-precio-max" class="form-label">Precio Maximo ($)</label>
+          <input type="number" class="form-control" id="filtro-precio-max" value="" min="0" step="1" placeholder="0" />
+        </div>
+      </div>
+
+      <div class="col-md-10">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4>Catalogo</h4>
+          <div class="d-flex align-items-center">
+            <input type="text" class="form-control w-auto me-2" id="buscar" placeholder="Buscar planta...">
+
+            <button class="btn btn-primary" id="add-plant-btn">
+              <i class="fas fa-plus"></i> Agregar Planta
+            </button>
+          </div>
+        </div>
+        
+        <div class="row" id="plantas-container">
+        </div>
+      </div>
+
+      <div class="wishlist-sidebar" id="wishlist-sidebar">
+        <div class="sidebar-header">
+          <h5>Tu Lista de Deseos</h5>
+          <button type="button" class="btn-close text-reset" id="close-wishlist-btn" aria-label="Close"></button>
+        </div>
+        <div class="sidebar-body" id="sidebar-wishlist-items">
+          <p class="text-muted text-center mt-3" id="empty-wishlist-msg">Tu lista de deseos esta vacia</p>
+        </div>
+        <div class="sidebar-footer">
+          <p>Total: $<span id="sidebar-wishlist-total">0</span></p>
+          <a href="../wishlist/wishlist.html" class="btn btn-success w-100">Ver lista completa</a>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="formularioModalPlantas" tabindex="-1" aria-labelledby="plantaFormModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+              <h5 class="modal-title" id="plantaFormModalLabel">Agregar Nueva Planta</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="formulario-planta">
+                <input type="hidden" id="planta-id">
+
+                <div class="mb-3">
+                  <label for="nombre-comun" class="form-label">Nombre Comun</label>
+                  <input type="text" class="form-control" id="nombre-comun" required>
+                </div>
+                <div class="mb-3">
+                  <label for="nombre-cientifico" class="form-label">Nombre Cientifico</label>
+                  <input type="text" class="form-control" id="nombre-cientifico">
+                </div>
+                <div class="mb-3">
+                  <label for="imagen-url" class="form-label">Imagen de la Planta</label>
+                  <input type="file" class="form-control" id="imagen-url" accept="image/*">
+                  <small class="form-text text-muted">Selecciona solo una imagen</small>
+                  <img id="imagen-preview" src="#" alt="Vista previa de la imagen"
+                    style="max-width: 150px; margin-top: 10px; display: none;">
+                </div>
+                <div class="mb-3">
+                  <label for="categoria" class="form-label">Categoria</label>
+                  <select class="form-select" id="categoria" required>
+                    <option value="">Selecciona una categoria</option>
+                    <option value="aromatica">Aromatica</option>
+                    <option value="interior">Interior</option>
+                    <option value="exterior">Exterior</option>
+                    <option value="frutal">Frutal</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="necesidades" class="form-label">Necesidades (riego, luz, temperatura, tipo de
+                    suelo)</label>
+                  <textarea class="form-control" id="necesidades" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="dificultad" class="form-label">Nivel de Dificultad</label>
+                  <select class="form-select" id="dificultad" required>
+                    <option value="">Selecciona una dificultad</option>
+                    <option value="facil">Facil</option>
+                    <option value="media">Media</option>
+                    <option value="dificil">Dificil</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="precio" class="form-label">Precio Estimado ($)</label>
+                  <input type="number" class="form-control" id="precio" min="0" step="1" required>
+                </div>
+                <div class="mb-3">
+                  <label for="descripcion" class="form-label">Descripcion Breve</label>
+                  <textarea class="form-control" id="descripcion" rows="2"></textarea>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-success">Guardar Planta</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="modalConfirmacionBorrar" tabindex="-1" aria-labelledby="deleteConfirmModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+              <h5 class="modal-title" id="deleteConfirmModalLabel">Confirmar Eliminacion</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>¿Estas seguro de que deseas eliminar la planta "<strong id="nombre-planta-a-borrar"></strong>"? Esta
+                accion no se puede deshacer</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-danger" id="btn-confirmar-borrar">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="../../main.js"></script>
+      <script src="catalogo.js"></script>
+      <script src="../wishlist/wishlist.js"></script>
+</body>
+
+
+<footer class="bg-success text-white py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <h5>Green Leaf - Tu planteria de confianza</h5>
+        <ul class="list-unstyled">
+          <li><a href="../../index.html" class="text-white text-decoration-none">Inicio</a></li>
+          <li><a href="../plantas/catalogo.html" class="text-white text-decoration-none">Catalogo</a></li>
+          <li><a href="../faq/faq.html" class="text-white text-decoration-none">Preguntas frecuentes</a></li>
+          <li><a href="contacto.html" class="text-white text-decoration-none">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-3">
+        <p><strong>Email:</strong> green-leaf@gmail.com</p>
+        <p><strong>Tel:</strong> +54 341 0000000</p>
+        <p><strong>Instagram:</strong> @greenLeaf</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</html>

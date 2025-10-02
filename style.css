@@ -1,0 +1,236 @@
+:root {
+  --green: #4CAF50;
+  --light: #f5f5f5;
+  --dark: #333;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #f5f5f5;
+  color: #333;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+header {
+  background-color: #4CAF50;
+  padding: 1rem;
+  color: white;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center; /* Esto centrará verticalmente todos los items Flex */
+    /* Otros estilos Flexbox como justify-content */
+}
+
+main {
+  padding: 1rem;
+}
+
+#plantas,
+#lista-deseos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las imágenes dentro del carrusel en index.html */
+/* Selecciona las imágenes que están dentro de un elemento con la clase 'carousel-item' */
+.carousel-item img {
+  width: 100%;
+  height: 450px;
+  /* **Altura fija para el carrusel.** Ajusta este valor (ej. 400px, 600px, o 50vh) */
+  object-fit:cover;
+  /* **IMPORTANTE: Escala la imagen para cubrir el área, recortando si es necesario.** */
+  object-position: center center;
+  /* Centra la imagen dentro del área de corte */
+}
+
+/* Opcional: Puedes dar una altura mínima al carrusel completo para evitar saltos de contenido */
+#carouselExampleCaptions {
+  /* Reemplaza 'carouselExampleCaptions' con el ID de tu carrusel si es diferente */
+  min-height: 500px;
+  /* Debe coincidir con la altura de la imagen o ser un poco más */
+}
+
+/* Opcional: Media queries para hacer la altura del carrusel responsiva */
+@media (max-width: 768px) {
+  .carousel-item img {
+    height: 300px;
+    /* Menor altura en pantallas pequeñas */
+  }
+
+  #carouselExampleCaptions {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-item img {
+    height: 250px;
+    /* Aún menor altura en móviles */
+  }
+
+  #carouselExampleCaptions {
+    min-height: 250px;
+  }
+}
+
+/* Aumenta el tamaño de los íconos de las flechas */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 3rem;
+  height: 3rem;
+  background-size: 100% 100%;
+}
+
+/* Añade un fondo semi-transparente a los botones completos (el área clicable) */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 8%;
+  /* Ajusta el ancho de la zona clicable para que sea un poco más grande si quieres */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Fondo negro semi-transparente */
+  transition: background-color 0.3s ease;
+  /* Transición suave al pasar el ratón */
+}
+
+/* Efecto hover: se hace un poco más opaco al pasar el ratón */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+footer {
+  background-color: #4CAF50;
+  text-align: center;
+  padding: 1rem;
+  color: white;
+
+  width: 100%;
+  bottom: 0;
+}
+
+/* Estilos para el Panel de Wishlist Deslizante */
+.wishlist-sidebar {
+  position: fixed;
+  right: -350px;
+  /* Inicialmente fuera de la pantalla */
+  top: 0;
+  width: 350px;
+  height: 100%;
+  background-color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  transition: right 0.3s ease-in-out;
+  z-index: 1050;
+  /* Por encima de otros elementos */
+  display: flex;
+  flex-direction: column;
+}
+
+.wishlist-sidebar.open {
+  right: 0;
+  /* Se mueve a la vista */
+}
+
+.sidebar-header {
+  padding: 15px 25px;
+  background-color: var(--green);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  /* Para que quede en la parte superior */
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.sidebar-header .btn-close {
+  filter: invert(1);
+  /* Hace el ícono blanco */
+}
+
+.sidebar-body {
+  flex-grow: 1;
+  /* Para que ocupe el espacio restante */
+  padding: 20px;
+  padding-top: 70px;
+  overflow-y: auto;
+  /* Para scroll si hay muchos elementos */
+}
+
+.sidebar-footer {
+  padding: 15px 20px;
+  background-color: #e9ecef;
+  /* Un gris claro para el footer */
+  border-top: 1px solid #dee2e6;
+  text-align: center;
+}
+
+/* Estilos para los elementos dentro de la wishlist sidebar */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+}
+
+.sidebar-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-right: 15px;
+}
+
+.sidebar-item-details h6 {
+  margin-bottom: 5px;
+  font-size: 1rem;
+  color: var(--dark);
+}
+
+.sidebar-item-details p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.sidebar-item .remove-btn {
+  margin-left: auto;
+  /* Mueve el botón a la derecha */
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* Oculta el botón de login en el navbar permanentemente */
+#login-btn {
+  display: none !important;
+}
