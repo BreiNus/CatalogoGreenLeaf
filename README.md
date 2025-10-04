@@ -1,4 +1,4 @@
-<strong>Nombre del Proyecto<strong>
+<strong>Nombre del Proyecto</strong>
 <br>
 Green Leaf – Catálogo Interactivo de Plantas
 <br>
